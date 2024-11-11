@@ -35,6 +35,11 @@ class _AddItemWidgetState extends State<AddItemWidget> {
         duration: const Duration(milliseconds: 1000),
         callback: (timer) async {
           if (FFAppState().scannerdata != '') {
+            safeSetState(() {
+              _model.barcodeTextController?.text = FFAppState().scannerdata;
+              _model.barcodeTextController?.selection = TextSelection.collapsed(
+                  offset: _model.barcodeTextController!.text.length);
+            });
             _model.getBobbinDataResponse = await GetBobbinDataCall.call(
               barcode: FFAppState().scannerdata,
             );
@@ -65,8 +70,7 @@ class _AddItemWidgetState extends State<AddItemWidget> {
       );
     });
 
-    _model.barcodeTextController ??=
-        TextEditingController(text: FFAppState().scannerdata);
+    _model.barcodeTextController ??= TextEditingController();
     _model.barcodeFocusNode ??= FocusNode();
 
     _model.itemnameTextController ??= TextEditingController();
