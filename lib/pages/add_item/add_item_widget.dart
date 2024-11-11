@@ -56,7 +56,7 @@ class _AddItemWidgetState extends State<AddItemWidget> {
               });
               safeSetState(() {
                 _model.itemnameTextController?.text =
-                    GetBobbinDataCall.description(
+                    GetBobbinDataCall.itemname(
                   (_model.getBobbinDataResponse?.jsonBody ?? ''),
                 )!;
                 _model.itemnameTextController?.selection =
