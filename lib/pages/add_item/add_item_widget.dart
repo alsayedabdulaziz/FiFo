@@ -29,7 +29,7 @@ class _AddItemWidgetState extends State<AddItemWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      FFAppState().scannerdata = ' ';
+      FFAppState().scannerdata = '';
       safeSetState(() {});
       _model.instantTimer = InstantTimer.periodic(
         duration: const Duration(milliseconds: 1000),
@@ -56,7 +56,7 @@ class _AddItemWidgetState extends State<AddItemWidget> {
               });
               safeSetState(() {
                 _model.itemnameTextController?.text =
-                    GetBobbinDataCall.description(
+                    GetBobbinDataCall.itemname(
                   (_model.getBobbinDataResponse?.jsonBody ?? ''),
                 )!;
                 _model.itemnameTextController?.selection =

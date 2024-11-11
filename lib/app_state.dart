@@ -20,7 +20,7 @@ class FFAppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  String _scannerdata = ' ';
+  String _scannerdata = '';
   String get scannerdata => _scannerdata;
   set scannerdata(String value) {
     _scannerdata = value;
