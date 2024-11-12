@@ -18,7 +18,7 @@ class GetBobbinDataCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'GetBobbinData',
-      apiUrl: 'https://b14d-154-183-234-39.ngrok-free.app/v1/GetBarcodeData',
+      apiUrl: 'https://3e46-196-159-24-179.ngrok-free.app/v1/GetBarcodeData',
       callType: ApiCallType.POST,
       headers: {},
       params: {},
@@ -42,6 +42,15 @@ class GetBobbinDataCall {
         response,
         r'''$.Description''',
       ));
+  static List<String>? storageAreas(dynamic response) => (getJsonField(
+        response,
+        r'''$.Areas''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
 }
 
 class LoginRequestCall {
@@ -75,6 +84,125 @@ class LoginRequestCall {
         response,
         r'''$.status''',
       ));
+}
+
+class AddItemCall {
+  static Future<ApiCallResponse> call({
+    String? barcode = '',
+    String? storageArea = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "Barcode": "$barcode",
+  "Storage Area": "$storageArea"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'AddItem',
+      apiUrl: 'https://3e46-196-159-24-179.ngrok-free.app/v1/AddItem',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class ConsumeMaterialCall {
+  static Future<ApiCallResponse> call({
+    String? shortCode = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "ShortCode": "$shortCode"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'ConsumeMaterial',
+      apiUrl: 'https://3e46-196-159-24-179.ngrok-free.app/v1/ConsumeMaterial',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static String? barcode(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.Barcode''',
+      ));
+  static String? matName(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.Mat_Name''',
+      ));
+  static String? storageArea(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$.Storage_Location''',
+      ));
+  static String? ecpireDate(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$.Expire_Date''',
+      ));
+  static String? insertionDate(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$.Insertion_Date''',
+      ));
+  static String? productionDate(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$.Production_Date''',
+      ));
+}
+
+class GetStorageAreasCall {
+  static Future<ApiCallResponse> call({
+    String? barcode = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "Barcode": "$barcode"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'GetStorageAreas',
+      apiUrl: 'https://3e46-196-159-24-179.ngrok-free.app/v1/GetStorageAreas',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static List<String>? storageAreas(dynamic response) => (getJsonField(
+        response,
+        r'''$.Areas''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
 }
 
 class ApiPagingParams {

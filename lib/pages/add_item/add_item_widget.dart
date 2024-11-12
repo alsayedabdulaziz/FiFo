@@ -1,7 +1,9 @@
 import '/backend/api_requests/api_calls.dart';
+import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/instant_timer.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
@@ -35,34 +37,46 @@ class _AddItemWidgetState extends State<AddItemWidget> {
         duration: const Duration(milliseconds: 1000),
         callback: (timer) async {
           if (FFAppState().scannerdata != '') {
-            safeSetState(() {
-              _model.barcodeTextController?.text = FFAppState().scannerdata;
-              _model.barcodeTextController?.selection = TextSelection.collapsed(
-                  offset: _model.barcodeTextController!.text.length);
-            });
-            _model.getBobbinDataResponse = await GetBobbinDataCall.call(
-              barcode: FFAppState().scannerdata,
-            );
+            if (FFAppState().scannerdata != _model.lastscannedBarcode) {
+              safeSetState(() {
+                _model.barcodeTextController?.text = FFAppState().scannerdata;
+                _model.barcodeTextController?.selection =
+                    TextSelection.collapsed(
+                        offset: _model.barcodeTextController!.text.length);
+              });
+              _model.lastscannedBarcode = FFAppState().scannerdata;
+              safeSetState(() {});
+              _model.getBobbinDataResponse = await GetBobbinDataCall.call(
+                barcode: _model.lastscannedBarcode,
+              );
 
-            if ((_model.getBobbinDataResponse?.succeeded ?? true)) {
-              safeSetState(() {
-                _model.descriptionTextController?.text =
-                    GetBobbinDataCall.description(
+              if ((_model.getBobbinDataResponse?.succeeded ?? true)) {
+                safeSetState(() {
+                  _model.descriptionTextController?.text =
+                      GetBobbinDataCall.description(
+                    (_model.getBobbinDataResponse?.jsonBody ?? ''),
+                  )!;
+                  _model.descriptionTextController?.selection =
+                      TextSelection.collapsed(
+                          offset:
+                              _model.descriptionTextController!.text.length);
+                });
+                safeSetState(() {
+                  _model.itemnameTextController?.text =
+                      GetBobbinDataCall.itemname(
+                    (_model.getBobbinDataResponse?.jsonBody ?? ''),
+                  )!;
+                  _model.itemnameTextController?.selection =
+                      TextSelection.collapsed(
+                          offset: _model.itemnameTextController!.text.length);
+                });
+                _model.storageareas = GetBobbinDataCall.storageAreas(
                   (_model.getBobbinDataResponse?.jsonBody ?? ''),
-                )!;
-                _model.descriptionTextController?.selection =
-                    TextSelection.collapsed(
-                        offset: _model.descriptionTextController!.text.length);
-              });
-              safeSetState(() {
-                _model.itemnameTextController?.text =
-                    GetBobbinDataCall.itemname(
-                  (_model.getBobbinDataResponse?.jsonBody ?? ''),
-                )!;
-                _model.itemnameTextController?.selection =
-                    TextSelection.collapsed(
-                        offset: _model.itemnameTextController!.text.length);
-              });
+                )!
+                    .toList()
+                    .cast<String>();
+                safeSetState(() {});
+              }
             }
           }
         },
@@ -240,23 +254,46 @@ class _AddItemWidgetState extends State<AddItemWidget> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(
-                                          'Storage',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Inter',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                letterSpacing: 0.0,
-                                              ),
-                                        ),
-                                        Icon(
-                                          Icons.arrow_drop_down,
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          size: 24.0,
+                                        FlutterFlowDropDown<String>(
+                                          controller: _model
+                                                  .storageAreasValueController ??=
+                                              FormFieldController<String>(null),
+                                          options: _model.storageareas,
+                                          onChanged: (val) => safeSetState(() =>
+                                              _model.storageAreasValue = val),
+                                          width: 130.0,
+                                          height: 30.0,
+                                          textStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Inter',
+                                                    fontSize: 12.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                  ),
+                                          hintText: 'Storage Area',
+                                          icon: Icon(
+                                            Icons.keyboard_arrow_down_rounded,
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            size: 24.0,
+                                          ),
+                                          fillColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryBackground,
+                                          elevation: 2.0,
+                                          borderColor: Colors.transparent,
+                                          borderWidth: 0.0,
+                                          borderRadius: 8.0,
+                                          margin:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  12.0, 0.0, 12.0, 0.0),
+                                          hidesUnderline: true,
+                                          isOverButton: false,
+                                          isSearchable: false,
+                                          isMultiSelect: false,
                                         ),
                                       ],
                                     ),
@@ -376,7 +413,7 @@ class _AddItemWidgetState extends State<AddItemWidget> {
                               autofocus: false,
                               obscureText: false,
                               decoration: InputDecoration(
-                                labelText: 'Description',
+                                labelText: 'Product Description',
                                 labelStyle: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -438,8 +475,54 @@ class _AddItemWidgetState extends State<AddItemWidget> {
                     ),
                   ),
                   FFButtonWidget(
-                    onPressed: () {
-                      print('Button pressed ...');
+                    onPressed: () async {
+                      if ((_model.barcodeTextController.text != '') &&
+                          (_model.storageAreasValue != null &&
+                              _model.storageAreasValue != '')) {
+                        _model.apiResult3zf = await AddItemCall.call(
+                          barcode: _model.lastscannedBarcode,
+                          storageArea: _model.storageAreasValue,
+                        );
+
+                        if ((_model.apiResult3zf?.succeeded ?? true)) {
+                          await showDialog(
+                            context: context,
+                            builder: (alertDialogContext) {
+                              return AlertDialog(
+                                title: const Text('Success'),
+                                content: const Text('Item Added!'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(alertDialogContext),
+                                    child: const Text('Ok'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        }
+                      } else {
+                        await showDialog(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: const Text('Error'),
+                              content:
+                                  const Text('Scan Barcode And Select Storage Area!'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext),
+                                  child: const Text('Ok'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      }
+
+                      safeSetState(() {});
                     },
                     text: 'Add Item',
                     options: FFButtonOptions(
@@ -461,8 +544,19 @@ class _AddItemWidgetState extends State<AddItemWidget> {
                     ),
                   ),
                   FFButtonWidget(
-                    onPressed: () {
-                      print('Button pressed ...');
+                    onPressed: () async {
+                      safeSetState(() {
+                        _model.storageAreasValueController?.reset();
+                      });
+                      safeSetState(() {
+                        _model.barcodeTextController?.clear();
+                        _model.itemnameTextController?.clear();
+                        _model.descriptionTextController?.clear();
+                      });
+                      _model.lastscannedBarcode = '-';
+                      safeSetState(() {});
+                      FFAppState().scannerdata = '';
+                      safeSetState(() {});
                     },
                     text: 'Cancel',
                     options: FFButtonOptions(

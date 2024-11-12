@@ -72,7 +72,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 alignment: const AlignmentDirectional(0.0, 0.0),
                 child: Padding(
                   padding:
-                      const EdgeInsetsDirectional.fromSTEB(15.0, 50.0, 15.0, 50.0),
+                      const EdgeInsetsDirectional.fromSTEB(15.0, 20.0, 15.0, 10.0),
                   child: Container(
                     width: double.infinity,
                     height: 400.0,
