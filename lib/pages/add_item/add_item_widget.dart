@@ -482,6 +482,7 @@ class _AddItemWidgetState extends State<AddItemWidget> {
                         _model.apiResult3zf = await AddItemCall.call(
                           barcode: _model.lastscannedBarcode,
                           storageArea: _model.storageAreasValue,
+                          itemName: _model.itemnameTextController.text,
                         );
 
                         if ((_model.apiResult3zf?.succeeded ?? true)) {
