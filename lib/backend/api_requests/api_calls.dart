@@ -90,11 +90,13 @@ class AddItemCall {
   static Future<ApiCallResponse> call({
     String? barcode = '',
     String? storageArea = '',
+    String? itemName = '',
   }) async {
     final ffApiRequestBody = '''
 {
   "Barcode": "$barcode",
-  "Storage Area": "$storageArea"
+  "Storage Area": "$storageArea",
+  "Item Name": "$itemName"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'AddItem',

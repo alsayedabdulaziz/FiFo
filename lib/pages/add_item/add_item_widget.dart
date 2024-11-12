@@ -261,7 +261,7 @@ class _AddItemWidgetState extends State<AddItemWidget> {
                                           options: _model.storageareas,
                                           onChanged: (val) => safeSetState(() =>
                                               _model.storageAreasValue = val),
-                                          width: 130.0,
+                                          width: 120.0,
                                           height: 30.0,
                                           textStyle:
                                               FlutterFlowTheme.of(context)
@@ -482,6 +482,7 @@ class _AddItemWidgetState extends State<AddItemWidget> {
                         _model.apiResult3zf = await AddItemCall.call(
                           barcode: _model.lastscannedBarcode,
                           storageArea: _model.storageAreasValue,
+                          itemName: _model.itemnameTextController.text,
                         );
 
                         if ((_model.apiResult3zf?.succeeded ?? true)) {
@@ -554,6 +555,7 @@ class _AddItemWidgetState extends State<AddItemWidget> {
                         _model.descriptionTextController?.clear();
                       });
                       _model.lastscannedBarcode = '-';
+                      _model.storageareas = [];
                       safeSetState(() {});
                       FFAppState().scannerdata = '';
                       safeSetState(() {});
