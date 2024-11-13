@@ -424,7 +424,7 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Expireing Date:',
+                                  'Expiration Date:',
                                   style: FlutterFlowTheme.of(context)
                                       .bodyLarge
                                       .override(

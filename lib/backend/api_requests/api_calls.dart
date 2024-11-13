@@ -217,7 +217,7 @@ class ConfirmConsumptionCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'ConfirmConsumption',
-      apiUrl: 'http://172.22.105.125:8002/FIFOConfirmConsumption',
+      apiUrl: 'http://172.22.105.125:8002/FIFO/ConfirmConsumption',
       callType: ApiCallType.POST,
       headers: {},
       params: {},
