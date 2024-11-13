@@ -38,6 +38,39 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
             if (FFAppState().scannerdata != _model.lastscannedBarcode) {
               _model.lastscannedBarcode = FFAppState().scannerdata;
               safeSetState(() {});
+              if (_model.lastscannedBarcode == _model.barcodetoconsume) {
+                await showDialog(
+                  context: context,
+                  builder: (alertDialogContext) {
+                    return AlertDialog(
+                      title: const Text('Success'),
+                      content: const Text('You Can Consume'),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(alertDialogContext),
+                          child: const Text('Ok'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              } else {
+                await showDialog(
+                  context: context,
+                  builder: (alertDialogContext) {
+                    return AlertDialog(
+                      title: const Text('ERROR'),
+                      content: const Text('WRONG BARCODE!'),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(alertDialogContext),
+                          child: const Text('Ok'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              }
             }
           }
         },
@@ -485,7 +518,7 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
                   FFButtonWidget(
                     onPressed: () async {
                       if (_model.textController.text != '') {
-                        _model.apiResultyq0 = await ConfiruConsumptionCall.call(
+                        _model.apiResultyq0 = await ConfirmConsumptionCall.call(
                           shortCode: _model.textController.text,
                         );
 

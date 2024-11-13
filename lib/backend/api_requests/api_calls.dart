@@ -18,7 +18,7 @@ class GetBobbinDataCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'GetBobbinData',
-      apiUrl: 'http://172.22.105.125:8002/FIFOGetBarcodeData',
+      apiUrl: 'http://172.22.105.125:8002/FIFO/GetBarcodeData',
       callType: ApiCallType.POST,
       headers: {},
       params: {},
@@ -207,7 +207,7 @@ class GetStorageAreasCall {
           .toList();
 }
 
-class ConfiruConsumptionCall {
+class ConfirmConsumptionCall {
   static Future<ApiCallResponse> call({
     String? shortCode = '',
   }) async {
@@ -216,7 +216,7 @@ class ConfiruConsumptionCall {
   "Short_Code": "$shortCode"
 }''';
     return ApiManager.instance.makeApiCall(
-      callName: 'ConfiruConsumption',
+      callName: 'ConfirmConsumption',
       apiUrl: 'http://172.22.105.125:8002/FIFOConfirmConsumption',
       callType: ApiCallType.POST,
       headers: {},

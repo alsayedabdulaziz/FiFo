@@ -28,7 +28,7 @@ class ConsumeMaterialModel extends FlutterFlowModel<ConsumeMaterialWidget> {
   String? Function(BuildContext, String?)? textControllerValidator;
   // Stores action output result for [Backend Call - API (ConsumeMaterial)] action in TextField widget.
   ApiCallResponse? getShortCodeResponse;
-  // Stores action output result for [Backend Call - API (ConfiruConsumption)] action in Button widget.
+  // Stores action output result for [Backend Call - API (ConfirmConsumption)] action in Button widget.
   ApiCallResponse? apiResultyq0;
 
   @override
