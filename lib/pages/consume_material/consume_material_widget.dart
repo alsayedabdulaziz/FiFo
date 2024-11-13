@@ -148,7 +148,7 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              'Select Storage Location',
+                              'Select Item',
                               style: FlutterFlowTheme.of(context)
                                   .headlineSmall
                                   .override(
@@ -178,7 +178,7 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
                                     Align(
                                       alignment: const AlignmentDirectional(0.0, 0.0),
                                       child: Text(
-                                        'Enter Short Code',
+                                        'Enter Item Name',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
@@ -370,7 +370,7 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Barcode:',
+                                  'Bobin Barcode:',
                                   style: FlutterFlowTheme.of(context)
                                       .bodyLarge
                                       .override(
