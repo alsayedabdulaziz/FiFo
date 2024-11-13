@@ -54,6 +54,9 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
                     );
                   },
                 );
+                _model.varified = true;
+                _model.consume = true;
+                safeSetState(() {});
               } else {
                 await showDialog(
                   context: context,
@@ -70,6 +73,9 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
                     );
                   },
                 );
+                _model.varified = false;
+                _model.consume = false;
+                safeSetState(() {});
               }
             }
           }
@@ -518,17 +524,51 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
                   FFButtonWidget(
                     onPressed: () async {
                       if (_model.textController.text != '') {
-                        _model.apiResultyq0 = await ConfirmConsumptionCall.call(
-                          shortCode: _model.textController.text,
-                        );
+                        if (_model.varified) {
+                          _model.apiResultyq0 =
+                              await ConfirmConsumptionCall.call(
+                            shortCode: _model.textController.text,
+                          );
 
-                        if ((_model.apiResultyq0?.succeeded ?? true)) {
+                          if ((_model.apiResultyq0?.succeeded ?? true)) {
+                            await showDialog(
+                              context: context,
+                              builder: (alertDialogContext) {
+                                return AlertDialog(
+                                  title: const Text('Success'),
+                                  content: const Text('Item Consumed'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(alertDialogContext),
+                                      child: const Text('Ok'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                            _model.varified = false;
+                            _model.consume = false;
+                            _model.lastscannedBarcode = '-';
+                            _model.productiondate = '-';
+                            _model.expiredate = '-';
+                            _model.insertiondate = '-';
+                            _model.storagearea = '-';
+                            _model.barcodetoconsume = '-';
+                            safeSetState(() {});
+                            safeSetState(() {
+                              _model.textController?.clear();
+                            });
+                            FFAppState().scannerdata = '';
+                            safeSetState(() {});
+                          }
+                        } else {
                           await showDialog(
                             context: context,
                             builder: (alertDialogContext) {
                               return AlertDialog(
-                                title: const Text('Success'),
-                                content: const Text('Item Consumed'),
+                                title: const Text('ERROR'),
+                                content: const Text('Scan Barcode First'),
                                 actions: [
                                   TextButton(
                                     onPressed: () =>
@@ -546,7 +586,7 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
                           builder: (alertDialogContext) {
                             return AlertDialog(
                               title: const Text('Error'),
-                              content: const Text('Enter Short Code First!'),
+                              content: const Text('Enter Item Name First!'),
                               actions: [
                                 TextButton(
                                   onPressed: () =>
@@ -569,7 +609,9 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
                           const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       iconPadding:
                           const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).primary,
+                      color: _model.consume
+                          ? const Color(0xFF35B02D)
+                          : const Color(0xFFBA2525),
                       textStyle:
                           FlutterFlowTheme.of(context).titleMedium.override(
                                 fontFamily: 'Inter Tight',
