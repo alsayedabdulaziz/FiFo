@@ -591,6 +591,7 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
                             _model.insertiondate = '-';
                             _model.storagearea = '-';
                             _model.barcodetoconsume = '-';
+                            _model.itembarcode = '-';
                             safeSetState(() {});
                             safeSetState(() {
                               _model.textController?.clear();
@@ -670,6 +671,7 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
                       _model.insertiondate = '-';
                       _model.storagearea = '-';
                       _model.barcodetoconsume = '-';
+                      _model.itembarcode = '-';
                       safeSetState(() {});
                       FFAppState().scannerdata = '';
                       safeSetState(() {});
