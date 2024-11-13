@@ -236,6 +236,12 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
                                                       ?.jsonBody ??
                                                   ''),
                                             )!;
+                                            _model.itembarcode =
+                                                ConsumeMaterialCall.itemBarcode(
+                                              (_model.getShortCodeResponse
+                                                      ?.jsonBody ??
+                                                  ''),
+                                            )!;
                                             safeSetState(() {});
                                           }
 
@@ -384,6 +390,36 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
                                     decoration: const BoxDecoration(),
                                     child: Text(
                                       _model.barcodetoconsume,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyLarge
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                  ),
+                                ),
+                              ].divide(const SizedBox(width: 5.0)),
+                            ),
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Item Barcode:',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyLarge
+                                      .override(
+                                        fontFamily: 'Inter',
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                ),
+                                Expanded(
+                                  child: Container(
+                                    decoration: const BoxDecoration(),
+                                    child: Text(
+                                      _model.itembarcode,
                                       style: FlutterFlowTheme.of(context)
                                           .bodyLarge
                                           .override(
