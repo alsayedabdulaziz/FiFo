@@ -250,11 +250,11 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
                             const Opacity(
                               opacity: 0.0,
                               child: SizedBox(
-                                width: 300.0,
-                                height: 10.0,
+                                width: 393.0,
+                                height: 20.0,
                                 child: custom_widgets.Getscannerdatawidget(
-                                  width: 300.0,
-                                  height: 10.0,
+                                  width: 393.0,
+                                  height: 20.0,
                                 ),
                               ),
                             ),
@@ -270,7 +270,6 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
                       borderRadius: BorderRadius.circular(16.0),
                     ),
                     child: Container(
-                      width: MediaQuery.sizeOf(context).width * 1.0,
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).secondaryBackground,
                         borderRadius: BorderRadius.circular(16.0),
@@ -474,7 +473,7 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
                       borderRadius: BorderRadius.circular(28.0),
                     ),
                   ),
-                ].divide(const SizedBox(height: 24.0)),
+                ].divide(const SizedBox(height: 9.0)),
               ),
             ),
           ),
