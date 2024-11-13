@@ -361,7 +361,7 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
                             ),
                             Row(
                               mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
                                   'Barcode:',
@@ -391,7 +391,7 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
                             ),
                             Row(
                               mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
                                   'Production Date:',
@@ -424,7 +424,7 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Expireing Date:',
+                                  'Expiration Date:',
                                   style: FlutterFlowTheme.of(context)
                                       .bodyLarge
                                       .override(
@@ -481,7 +481,7 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
                             ),
                             Row(
                               mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
                                   'Storage Area:',
