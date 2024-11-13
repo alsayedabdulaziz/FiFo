@@ -18,7 +18,7 @@ class GetBobbinDataCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'GetBobbinData',
-      apiUrl: 'https://3e46-196-159-24-179.ngrok-free.app/v1/GetBarcodeData',
+      apiUrl: 'http://172.22.105.125:8002/FIFOGetBarcodeData',
       callType: ApiCallType.POST,
       headers: {},
       params: {},
@@ -65,7 +65,7 @@ class LoginRequestCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'LoginRequest',
-      apiUrl: 'https://b14d-154-183-234-39.ngrok-free.app/v1/LogInRequest',
+      apiUrl: 'http://172.22.105.125:8002/FIFO/LogInRequest',
       callType: ApiCallType.POST,
       headers: {},
       params: {},
@@ -100,7 +100,7 @@ class AddItemCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'AddItem',
-      apiUrl: 'https://3e46-196-159-24-179.ngrok-free.app/v1/AddItem',
+      apiUrl: 'http://172.22.105.125:8002/FIFO/AddItem',
       callType: ApiCallType.POST,
       headers: {},
       params: {},
@@ -126,7 +126,7 @@ class ConsumeMaterialCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'ConsumeMaterial',
-      apiUrl: 'https://3e46-196-159-24-179.ngrok-free.app/v1/ConsumeMaterial',
+      apiUrl: 'http://172.22.105.125:8002/FIFO/ConsumeMaterial',
       callType: ApiCallType.POST,
       headers: {},
       params: {},
@@ -181,7 +181,7 @@ class GetStorageAreasCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'GetStorageAreas',
-      apiUrl: 'https://3e46-196-159-24-179.ngrok-free.app/v1/GetStorageAreas',
+      apiUrl: 'http://172.22.105.125:8002/FIFO/GetStorageAreas',
       callType: ApiCallType.POST,
       headers: {},
       params: {},
@@ -217,8 +217,7 @@ class ConfiruConsumptionCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'ConfiruConsumption',
-      apiUrl:
-          'https://e30f-196-159-18-62.ngrok-free.app/FIFO/ConfirmConsumption',
+      apiUrl: 'http://172.22.105.125:8002/FIFOConfirmConsumption',
       callType: ApiCallType.POST,
       headers: {},
       params: {},
