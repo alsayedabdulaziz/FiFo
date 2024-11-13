@@ -340,16 +340,18 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
                                         fontWeight: FontWeight.w500,
                                       ),
                                 ),
-                                Container(
-                                  decoration: const BoxDecoration(),
-                                  child: Text(
-                                    _model.barcodetoconsume,
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyLarge
-                                        .override(
-                                          fontFamily: 'Inter',
-                                          letterSpacing: 0.0,
-                                        ),
+                                Expanded(
+                                  child: Container(
+                                    decoration: const BoxDecoration(),
+                                    child: Text(
+                                      _model.barcodetoconsume,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyLarge
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
                                   ),
                                 ),
                               ].divide(const SizedBox(width: 5.0)),
@@ -368,16 +370,18 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
                                         fontWeight: FontWeight.w500,
                                       ),
                                 ),
-                                Container(
-                                  decoration: const BoxDecoration(),
-                                  child: Text(
-                                    _model.productiondate,
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyLarge
-                                        .override(
-                                          fontFamily: 'Inter',
-                                          letterSpacing: 0.0,
-                                        ),
+                                Expanded(
+                                  child: Container(
+                                    decoration: const BoxDecoration(),
+                                    child: Text(
+                                      _model.productiondate,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyLarge
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
                                   ),
                                 ),
                               ].divide(const SizedBox(width: 5.0)),
@@ -396,16 +400,18 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
                                         fontWeight: FontWeight.w500,
                                       ),
                                 ),
-                                Container(
-                                  decoration: const BoxDecoration(),
-                                  child: Text(
-                                    _model.expiredate,
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyLarge
-                                        .override(
-                                          fontFamily: 'Inter',
-                                          letterSpacing: 0.0,
-                                        ),
+                                Expanded(
+                                  child: Container(
+                                    decoration: const BoxDecoration(),
+                                    child: Text(
+                                      _model.expiredate,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyLarge
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
                                   ),
                                 ),
                               ].divide(const SizedBox(width: 5.0)),
@@ -424,16 +430,18 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
                                         fontWeight: FontWeight.w500,
                                       ),
                                 ),
-                                Container(
-                                  decoration: const BoxDecoration(),
-                                  child: Text(
-                                    _model.insertiondate,
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyLarge
-                                        .override(
-                                          fontFamily: 'Inter',
-                                          letterSpacing: 0.0,
-                                        ),
+                                Expanded(
+                                  child: Container(
+                                    decoration: const BoxDecoration(),
+                                    child: Text(
+                                      _model.insertiondate,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyLarge
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
                                   ),
                                 ),
                               ].divide(const SizedBox(width: 5.0)),
@@ -453,16 +461,18 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
                                         fontWeight: FontWeight.w500,
                                       ),
                                 ),
-                                Container(
-                                  decoration: const BoxDecoration(),
-                                  child: Text(
-                                    _model.storagearea,
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Inter',
-                                          letterSpacing: 0.0,
-                                        ),
+                                Expanded(
+                                  child: Container(
+                                    decoration: const BoxDecoration(),
+                                    child: Text(
+                                      _model.storagearea,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
                                   ),
                                 ),
                               ].divide(const SizedBox(width: 5.0)),
