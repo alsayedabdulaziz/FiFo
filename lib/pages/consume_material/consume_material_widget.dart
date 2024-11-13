@@ -609,9 +609,10 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
                           const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       iconPadding:
                           const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: _model.consume
-                          ? const Color(0xFF35B02D)
-                          : const Color(0xFFBA2525),
+                      color: valueOrDefault<Color>(
+                        _model.consume ? const Color(0xFF35B02D) : const Color(0xFFBA2525),
+                        FlutterFlowTheme.of(context).primary,
+                      ),
                       textStyle:
                           FlutterFlowTheme.of(context).titleMedium.override(
                                 fontFamily: 'Inter Tight',
