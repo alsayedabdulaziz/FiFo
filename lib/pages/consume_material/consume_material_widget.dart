@@ -38,17 +38,6 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
             if (FFAppState().scannerdata != _model.lastscannedBarcode) {
               _model.lastscannedBarcode = FFAppState().scannerdata;
               safeSetState(() {});
-              _model.getBobbinDataResponse = await GetBobbinDataCall.call(
-                barcode: _model.lastscannedBarcode,
-              );
-
-              if ((_model.getBobbinDataResponse?.succeeded ?? true)) {
-                safeSetState(() {
-                  _model.textController?.text = _model.lastscannedBarcode;
-                  _model.textController?.selection = TextSelection.collapsed(
-                      offset: _model.textController!.text.length);
-                });
-              }
             }
           }
         },
@@ -150,7 +139,7 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
                                     Align(
                                       alignment: const AlignmentDirectional(0.0, 0.0),
                                       child: Text(
-                                        'Enter Barcode ',
+                                        'Enter Short Code',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
@@ -166,6 +155,53 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
                                       child: TextFormField(
                                         controller: _model.textController,
                                         focusNode: _model.textFieldFocusNode,
+                                        onFieldSubmitted: (_) async {
+                                          _model.getShortCodeResponse =
+                                              await ConsumeMaterialCall.call(
+                                            shortCode:
+                                                _model.textController.text,
+                                          );
+
+                                          if ((_model.getShortCodeResponse
+                                                  ?.succeeded ??
+                                              true)) {
+                                            _model.productiondate =
+                                                ConsumeMaterialCall
+                                                    .productionDate(
+                                              (_model.getShortCodeResponse
+                                                      ?.jsonBody ??
+                                                  ''),
+                                            )!;
+                                            _model.expiredate =
+                                                ConsumeMaterialCall.ecpireDate(
+                                              (_model.getShortCodeResponse
+                                                      ?.jsonBody ??
+                                                  ''),
+                                            )!;
+                                            _model.insertiondate =
+                                                ConsumeMaterialCall
+                                                    .insertionDate(
+                                              (_model.getShortCodeResponse
+                                                      ?.jsonBody ??
+                                                  ''),
+                                            )!;
+                                            _model.storagearea =
+                                                ConsumeMaterialCall.storageArea(
+                                              (_model.getShortCodeResponse
+                                                      ?.jsonBody ??
+                                                  ''),
+                                            )!;
+                                            _model.barcodetoconsume =
+                                                ConsumeMaterialCall.barcode(
+                                              (_model.getShortCodeResponse
+                                                      ?.jsonBody ??
+                                                  ''),
+                                            )!;
+                                            safeSetState(() {});
+                                          }
+
+                                          safeSetState(() {});
+                                        },
                                         autofocus: false,
                                         obscureText: false,
                                         decoration: InputDecoration(
@@ -305,7 +341,7 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
                                       ),
                                 ),
                                 Text(
-                                  '1234567890',
+                                  _model.barcodetoconsume,
                                   style: FlutterFlowTheme.of(context)
                                       .bodyLarge
                                       .override(
@@ -330,7 +366,7 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
                                       ),
                                 ),
                                 Text(
-                                  'Steel Rods',
+                                  _model.productiondate,
                                   style: FlutterFlowTheme.of(context)
                                       .bodyLarge
                                       .override(
@@ -355,7 +391,7 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
                                       ),
                                 ),
                                 Text(
-                                  '500 units',
+                                  _model.expiredate,
                                   style: FlutterFlowTheme.of(context)
                                       .bodyLarge
                                       .override(
@@ -380,7 +416,7 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
                                       ),
                                 ),
                                 Text(
-                                  '2023-06-15',
+                                  _model.insertiondate,
                                   style: FlutterFlowTheme.of(context)
                                       .bodyLarge
                                       .override(
@@ -406,7 +442,7 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
                                       ),
                                 ),
                                 Text(
-                                  'Hello World',
+                                  _model.storagearea,
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -422,8 +458,50 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
                     ),
                   ),
                   FFButtonWidget(
-                    onPressed: () {
-                      print('Button pressed ...');
+                    onPressed: () async {
+                      if (_model.textController.text != '') {
+                        _model.apiResultyq0 = await ConfiruConsumptionCall.call(
+                          shortCode: _model.textController.text,
+                        );
+
+                        if ((_model.apiResultyq0?.succeeded ?? true)) {
+                          await showDialog(
+                            context: context,
+                            builder: (alertDialogContext) {
+                              return AlertDialog(
+                                title: const Text('Success'),
+                                content: const Text('Item Consumed'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(alertDialogContext),
+                                    child: const Text('Ok'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        }
+                      } else {
+                        await showDialog(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: const Text('Error'),
+                              content: const Text('Enter Short Code First!'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext),
+                                  child: const Text('Ok'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      }
+
+                      safeSetState(() {});
                     },
                     text: 'Confirm Consumption',
                     options: FFButtonOptions(
@@ -445,8 +523,19 @@ class _ConsumeMaterialWidgetState extends State<ConsumeMaterialWidget> {
                     ),
                   ),
                   FFButtonWidget(
-                    onPressed: () {
-                      print('Button pressed ...');
+                    onPressed: () async {
+                      safeSetState(() {
+                        _model.textController?.clear();
+                      });
+                      _model.lastscannedBarcode = '-';
+                      _model.productiondate = '-';
+                      _model.expiredate = '-';
+                      _model.insertiondate = '-';
+                      _model.storagearea = '-';
+                      _model.barcodetoconsume = '-';
+                      safeSetState(() {});
+                      FFAppState().scannerdata = '';
+                      safeSetState(() {});
                     },
                     text: 'Cancel',
                     options: FFButtonOptions(

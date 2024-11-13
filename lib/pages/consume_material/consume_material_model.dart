@@ -9,15 +9,27 @@ class ConsumeMaterialModel extends FlutterFlowModel<ConsumeMaterialWidget> {
 
   String lastscannedBarcode = '-';
 
+  String productiondate = '-';
+
+  String expiredate = '-';
+
+  String insertiondate = '-';
+
+  String storagearea = '-';
+
+  String barcodetoconsume = '-';
+
   ///  State fields for stateful widgets in this page.
 
   InstantTimer? instantTimer;
-  // Stores action output result for [Backend Call - API (GetBobbinData)] action in ConsumeMaterial widget.
-  ApiCallResponse? getBobbinDataResponse;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
+  // Stores action output result for [Backend Call - API (ConsumeMaterial)] action in TextField widget.
+  ApiCallResponse? getShortCodeResponse;
+  // Stores action output result for [Backend Call - API (ConfiruConsumption)] action in Button widget.
+  ApiCallResponse? apiResultyq0;
 
   @override
   void initState(BuildContext context) {}

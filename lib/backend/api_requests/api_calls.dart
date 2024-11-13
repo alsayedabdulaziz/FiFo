@@ -207,6 +207,33 @@ class GetStorageAreasCall {
           .toList();
 }
 
+class ConfiruConsumptionCall {
+  static Future<ApiCallResponse> call({
+    String? shortCode = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "Short_Code": "$shortCode"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'ConfiruConsumption',
+      apiUrl:
+          'https://e30f-196-159-18-62.ngrok-free.app/FIFO/ConfirmConsumption',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;
