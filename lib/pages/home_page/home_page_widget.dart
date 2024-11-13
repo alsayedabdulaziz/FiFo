@@ -263,7 +263,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                             ''),
                                       ) ==
                                       true) {
-                                    context.pushNamed('MainMenu');
+                                    context.goNamed('MainMenu');
                                   } else {
                                     await showDialog(
                                       context: context,
