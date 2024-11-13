@@ -23,6 +23,8 @@ class ConsumeMaterialModel extends FlutterFlowModel<ConsumeMaterialWidget> {
 
   bool consume = false;
 
+  String itembarcode = '-';
+
   ///  State fields for stateful widgets in this page.
 
   InstantTimer? instantTimer;

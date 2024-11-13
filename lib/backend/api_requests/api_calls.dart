@@ -126,7 +126,7 @@ class ConsumeMaterialCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'ConsumeMaterial',
-      apiUrl: 'http://172.22.105.125:8002/FIFO/ConsumeMaterial',
+      apiUrl: 'https://63dc-196-159-17-204.ngrok-free.app/FIFO/ConsumeMaterial',
       callType: ApiCallType.POST,
       headers: {},
       params: {},
@@ -168,6 +168,11 @@ class ConsumeMaterialCall {
       castToType<String>(getJsonField(
         response,
         r'''$.Production_Date''',
+      ));
+  static String? itemBarcode(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$.Item_Barcode''',
       ));
 }
 
